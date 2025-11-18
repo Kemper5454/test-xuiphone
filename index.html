@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR & 3D Demo</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .ar-button {
+      padding: 16px 32px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+      background: #007aff;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    .ar-button:hover {
+      background: #005ecb;
+    }
+
+    .viewer-container {
+      width: 90%;
+      max-width: 800px;
+      height: 500px;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      background: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>AR & 3D Demo</h1>
+
+<div class="buttons">
+  <!-- iPhone AR -->
+  <a href="hab_en.reality" rel="ar" class="ar-button">Открыть для iPhone в AR</a>
+
+  <!-- Android AR -->
+  <button class="ar-button" id="android-ar-btn">Открыть для Android в AR</button>
+</div>
+
+<div class="viewer-container">
+  <!-- Общий 3D просмотр для всех -->
+  <model-viewer 
+    id="main-viewer"
+    src="engine.glb" 
+    alt="3D модель" 
+    camera-controls 
+    auto-rotate 
+    autoplay
+    ar 
+    ar-modes="scene-viewer webxr"
+    exposure="1"
+    shadow-intensity="1"
+    style="background: #e0e0e0;">
+  </model-viewer>
+</div>
+
+<script>
+  // Кнопка для Android AR — запускает AR через model-viewer
+  const androidBtn = document.getElementById('android-ar-btn');
+  const viewer = document.getElementById('main-viewer');
+
+  androidBtn.addEventListener('click', () => {
+    if (viewer) {
+      viewer.activateAR(); // открывает AR на Android через Scene Viewer/WebXR
+    }
+  });
+</script>
+
+</body>
+</html>
