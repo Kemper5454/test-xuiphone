@@ -72,12 +72,12 @@
 <h1>AR & 3D Demo</h1>
 
 
-  <!--
-  <a href="lymtree.usdz" rel="ar" class="ar-button">Открыть для iPhone в AR</a>
+  
+<div class="buttons">
 
 
-  <button class="ar-button" id="android-ar-btn">Открыть для Android в AR</button>
-</div>-->
+  <button class="ar-button" id="android-ar-btn">Открыть в AR</button>
+</div>
 
 <!-- Три модели в строку -->
 <div class="models-row">
@@ -89,7 +89,7 @@
       camera-controls
       auto-rotate
       ar
-      ar-modes="scene-viewer webxr">
+      ar-modes="scene-viewer webxr quick-look">
     </model-viewer>
   </div>
 
@@ -100,30 +100,10 @@
       camera-controls
       auto-rotate
       ar
-      ar-modes="scene-viewer webxr">
+      ar-modes="scene-viewer webxr quick-look">
     </model-viewer>
   </div>
 
-  <div class="model-box">
-    <model-viewer 
-      src="testtre3.glb"
-      alt="Модель 3"
-      camera-controls
-      auto-rotate
-      ar
-      ar-modes="scene-viewer webxr">
-    </model-viewer>
-  </div>
-  <div class="model-box">
-    <model-viewer 
-      src="testtre4.glb"
-      alt="Модель 4"
-      camera-controls
-      auto-rotate
-      ar
-      ar-modes="scene-viewer webxr">
-    </model-viewer>
-  </div>
 
 </div>
 
