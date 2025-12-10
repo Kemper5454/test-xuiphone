@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR & 3D Demo</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
   <style>
     body {
       font-family: sans-serif;
@@ -43,17 +44,26 @@
       background: #005ecb;
     }
 
-    .viewer-container {
-      width: 90%;
-      max-width: 800px;
-      height: 500px;
+    /* Контейнер с тремя моделями */
+    .models-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap; /* чтобы на телефонах переносилось */
     }
 
-    model-viewer {
+    .model-box {
+      width: 300px;
+      height: 350px;
+      background: #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .model-box model-viewer {
       width: 100%;
       height: 100%;
-      border-radius: 12px;
-      background: #e0e0e0;
     }
   </style>
 </head>
@@ -69,32 +79,51 @@
   <button class="ar-button" id="android-ar-btn">Открыть для Android в AR</button>
 </div>
 
-<div class="viewer-container">
-  <!-- Общий 3D просмотр для всех -->
-  <model-viewer 
-    id="main-viewer"
-    src="testtre.glb" 
-    alt="3D модель" 
-    camera-controls 
-    auto-rotate 
-    autoplay
-    ar 
-    ar-modes="scene-viewer webxr"
-    exposure="1"
-    shadow-intensity="1"
-    style="background: #e0e0e0;">
-  </model-viewer>
+<!-- Три модели в строку -->
+<div class="models-row">
+
+  <div class="model-box">
+    <model-viewer 
+      src="testtre.glb"
+      alt="Модель 1"
+      camera-controls
+      auto-rotate
+      ar
+      ar-modes="scene-viewer webxr">
+    </model-viewer>
+  </div>
+
+  <div class="model-box">
+    <model-viewer 
+      src="testtre2.glb"
+      alt="Модель 2"
+      camera-controls
+      auto-rotate
+      ar
+      ar-modes="scene-viewer webxr">
+    </model-viewer>
+  </div>
+
+  <div class="model-box">
+    <model-viewer 
+      src="model3.glb"
+      alt="Модель 3"
+      camera-controls
+      auto-rotate
+      ar
+      ar-modes="scene-viewer webxr">
+    </model-viewer>
+  </div>
+
 </div>
 
 <script>
-  // Кнопка для Android AR — запускает AR через model-viewer
+  // Кнопка для Android AR — открывает AR через model-viewer
   const androidBtn = document.getElementById('android-ar-btn');
-  const viewer = document.getElementById('main-viewer');
 
   androidBtn.addEventListener('click', () => {
-    if (viewer) {
-      viewer.activateAR(); // открывает AR на Android через Scene Viewer/WebXR
-    }
+    // Активируем AR на первой модели (можно сменить id)
+    document.querySelector(".model-box model-viewer").activateAR();
   });
 </script>
 
