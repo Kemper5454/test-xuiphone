@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>С новым годом!</title>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
@@ -11,13 +10,13 @@
     body {
       margin: 0;
       height: 100vh;
+      background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+      font-family: sans-serif;
+      color: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
-      font-family: sans-serif;
-      color: white;
       text-align: center;
     }
 
@@ -26,17 +25,20 @@
       margin-bottom: 30px;
     }
 
+    /* model-viewer занимает экран, но не показывает модель */
     model-viewer {
-      width: 0;
-      height: 0;
-      visibility: hidden;
+      position: fixed;
+      inset: 0;
+      background: transparent;
+      --poster-color: transparent;
     }
 
-    /* Кнопка как в твоём примере */
+    model-viewer::part(default-progress-bar) {
+      display: none;
+    }
+
+    /* Кнопка */
     .ar-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       height: 56px;
       padding: 0 28px;
       font-size: 18px;
@@ -45,14 +47,8 @@
       color: #111;
       border-radius: 12px;
       border: 1px solid #d1d5db;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .ar-button:hover {
-      background: #d1d5db;
-      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -61,7 +57,6 @@
   <h1>🎄 С новым годом!</h1>
 
   <model-viewer
-    id="treeAR"
     src="lymtree.glb"
     ios-src="lymtree.usdz"
     exposure="1"
@@ -74,11 +69,7 @@
     ar
     ar-modes="scene-viewer webxr quick-look"
   >
-    <button
-      slot="ar-button"
-      class="ar-button"
-      id="openAR"
-    >
+    <button slot="ar-button" class="ar-button">
       Перейти к Елке
     </button>
   </model-viewer>
