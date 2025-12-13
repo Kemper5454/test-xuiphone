@@ -11,11 +11,13 @@
     body {
       margin: 0;
       background: black;
+      overflow: hidden;
     }
 
     model-viewer {
-      width: 100vw;
-      height: 100vh;
+      width: 0;
+      height: 0;
+      visibility: hidden;
     }
   </style>
 </head>
@@ -23,22 +25,31 @@
 
 <model-viewer
   id="arModel"
-  src="lymtree.glb"          <!-- Android -->
-  ios-src="lymtree.usdz"    <!-- iPhone -->
+  src="lymtree.glb"     
+  ios-src="lymtree.usdz"
   ar
-  ar-modes="scene-viewer quick-look webxr"
-  camera-controls
-  autoplay
-  exposure="1"
-  shadow-intensity="1">
+  ar-modes="scene-viewer quick-look"
+  autoplay>
 </model-viewer>
 
 <script>
   const modelViewer = document.getElementById("arModel");
 
-  // Автостарт AR после загрузки
-  modelViewer.addEventListener("load", () => {
-    modelViewer.activateAR();
+  // Определяем iOS
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  window.addEventListener("load", () => {
+    if (isIOS) {
+      // iOS: сразу открываем Quick Look
+      const link = document.createElement("a");
+      link.rel = "ar";
+      link.href = "tree.usdz";
+      document.body.appendChild(link);
+      link.click();
+    } else {
+      // Android: сразу Scene Viewer
+      modelViewer.activateAR();
+    }
   });
 </script>
 
