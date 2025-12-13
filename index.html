@@ -3,32 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>С новым годом!</title>
-
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
     body {
       margin: 0;
       height: 100vh;
       background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
-      font-family: sans-serif;
-      color: white;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 32px;
+      justify-content: center;
+      font-family: sans-serif;
     }
 
     .ar-button {
-      padding: 16px 32px;
+      padding: 18px 36px;
       font-size: 20px;
       font-weight: bold;
       border: none;
@@ -43,66 +32,13 @@
       background: #00a845;
       transform: scale(1.05);
     }
-
-    /* model-viewer скрыт, но живой */
-    model-viewer {
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      position: absolute;
-      pointer-events: none;
-    }
   </style>
 </head>
 <body>
 
-  <h1>🎄 С новым годом!</h1>
-
-  <button class="ar-button" id="openAR">
+  <a href="ar.html" class="ar-button">
     Перейти к Елке
-  </button>
-
-  <!-- Невидимый model-viewer ТОЛЬКО для Android -->
-  <model-viewer
-    id="androidModel"
-    src="lymtree.glb"
-    exposure="1"
-    shadow-intensity="1"
-    environment-image="sunny_vondelpark_1k.hdr"
-    shadow-softness="0.7"
-    camera-controls
-    auto-rotate
-    autoplay
-    ar
-    ar-modes="scene-viewer webxr"
-  ></model-viewer>
-
-  <script>
-    const btn = document.getElementById("openAR");
-    const modelViewer = document.getElementById("androidModel");
-
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const isAndroid = /Android/i.test(navigator.userAgent);
-
-    btn.addEventListener("click", () => {
-      if (isIOS) {
-        // iOS — сразу Quick Look, без model-viewer
-        const link = document.createElement("a");
-        link.href = "lymtree.usdz";
-        link.rel = "ar";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      } 
-      else if (isAndroid) {
-        // Android — Scene Viewer
-        modelViewer.activateAR();
-      } 
-      else {
-        alert("AR доступен только на мобильных устройствах");
-      }
-    });
-  </script>
+  </a>
 
 </body>
 </html>
