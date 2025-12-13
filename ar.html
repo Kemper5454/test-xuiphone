@@ -25,7 +25,6 @@
 </head>
 <body>
 
-  <!-- Только для Android -->
   <model-viewer
     id="androidAR"
     src="lymtree.glb"
@@ -46,7 +45,6 @@
 
     window.addEventListener("load", () => {
       if (isIOS) {
-        // iOS — прямой Quick Look
         const link = document.createElement("a");
         link.href = "lymtree.usdz";
         link.rel = "ar";
@@ -55,7 +53,6 @@
         link.remove();
       } 
       else if (isAndroid) {
-        // Android — Scene Viewer
         document.getElementById("androidAR").activateAR();
       } 
       else {
