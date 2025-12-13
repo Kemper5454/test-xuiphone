@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AR Елка</title>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+    }
+
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<model-viewer
+  id="arModel"
+  src="lymtree.glb"          <!-- Android -->
+  ios-src="lymtree.usdz"    <!-- iPhone -->
+  ar
+  ar-modes="scene-viewer quick-look webxr"
+  camera-controls
+  autoplay
+  exposure="1"
+  shadow-intensity="1">
+</model-viewer>
+
+<script>
+  const modelViewer = document.getElementById("arModel");
+
+  // Автостарт AR после загрузки
+  modelViewer.addEventListener("load", () => {
+    modelViewer.activateAR();
+  });
+</script>
+
+</body>
+</html>
